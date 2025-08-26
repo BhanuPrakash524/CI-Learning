@@ -2,14 +2,15 @@ pipeline {
     agent any
 
     tools {
-        maven 'Maven'   // Use the Maven installation name in Jenkins (we’ll configure it)
-        jdk 'JDK21'     // Use the JDK installation name in Jenkins
+        jdk 'jdk-21'          // MUST match the JDK installation name in Jenkins
+        maven 'Maven3'        // MUST match the Maven installation name in Jenkins
     }
 
     stages {
         stage('Checkout') {
             steps {
-                git branch: 'main', url: 'https://github.com/<your-username>/SimpleJavaApp.git'
+                git branch: 'main',
+                    url: 'https://github.com/BhanuPrakash524/CI-Learning.git'
             }
         }
 
@@ -28,10 +29,10 @@ pipeline {
 
     post {
         success {
-            echo '✅ Build Successful!'
+            echo '✅ Build and Tests ran successfully!'
         }
         failure {
-            echo '❌ Build Failed!'
+            echo '❌ Build failed! Check the logs.'
         }
     }
 }
